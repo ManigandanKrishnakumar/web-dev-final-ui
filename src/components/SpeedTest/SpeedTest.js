@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { BsCloudDownload, BsCloudUpload } from "react-icons/bs";
 
 import "./SpeedTest.scss";
 import { NetworkProvider } from "../NetworkProvider/NetworkProvider";
+import { ACTION_TYPES } from "../../state-management/constants";
+import axiosConfig from "../../axiosConfig/axios-config";
+import { BACK_END_POINTS } from "../../apiconstants/apiConstants";
+import { AppContext } from "../../state-management/app-context";
 
 export const SpeedTest = () => {
   const [networkProvider, setNetworkProvider] = useState("");
@@ -11,13 +15,27 @@ export const SpeedTest = () => {
   const [result, setResult] = useState(null);
   const [downloadSpeed, setDownloadSpeed] = useState("N/A");
   const [uploadSpeed, setUploadSpeed] = useState("N/A");
+  const [error, setError] = useState();
+  const { dispatch } = useContext(AppContext);
+  const [saveError, setSaveError] = useState();
 
   useEffect(() => {
     SoMApiInit();
   }, []);
 
-  const saveResult = () => {
-    console.log("TODO: SAVE RESULT");
+  const saveResult = async () => {
+    try {
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
+      const res = await axiosConfig.post(
+        BACK_END_POINTS.SPEED_TEST.SAVE_RESULT,
+        result
+      );
+      if (!res.data.isSuccess) {
+        throw new Error(JSON.stringify(res.data));
+      }
+    } catch (e) {
+      console.log("ERR on Save : ", e);
+    }
   };
 
   const onTestCompleted = (testResult) => {
@@ -27,7 +45,12 @@ export const SpeedTest = () => {
     console.log(testResult);
   };
 
-  const onError = () => {};
+  const onError = (error) => {
+    console.log("ERR :", error);
+    if (error.code === 1001) {
+      setError(true);
+    }
+  };
 
   const onProgress = (progress) => {
     if (progress.type === "download") {
@@ -109,16 +132,22 @@ export const SpeedTest = () => {
         </div>
       )}
 
+      {error && (
+        <div className="error-message-container">
+          <p>
+            Sorry, you don't have access to do speed test. Please click the
+            following button to request access
+          </p>
+          <button>Request access</button>
+        </div>
+      )}
+
       <div className="actions-container">
-        <button id="start-button" onClick={startTest}>
+        <button className="btn" onClick={startTest}>
           Start Test
         </button>
 
-        <button
-          id="save-button"
-          disabled={result === null}
-          onClick={saveResult}
-        >
+        <button className="btn" disabled={result === null} onClick={saveResult}>
           Save Result
         </button>
       </div>

@@ -65,6 +65,36 @@
             }
         }
     }
+
+    .actions-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        
+        button {
+            &:last-child {
+                margin-left: 20px;
+            }
+        }
+        
+    }
+
+    button {
+        border: none;
+        outline: none;
+        background: white;
+        padding: 10px;
+        border: 2.5px solid #0F1322;
+        color: #0F1322;
+        border-radius: 25px;
+        font-weight: 600;
+
+        
+
+        &:disabled {
+           opacity: 0.5;
+        }
+    }
 }
 
 @keyframes fadeIn {
