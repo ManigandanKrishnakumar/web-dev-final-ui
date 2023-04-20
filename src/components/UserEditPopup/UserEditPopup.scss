@@ -1,0 +1,116 @@
+.user-edit-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.user-edit-popup-interior {
+    position: relative;
+    padding: 30px;
+    width: 100%;
+    max-width: 600px;
+    background-color: #eeece8;
+    border-radius: 7px;
+}
+
+.user-edit-close-button {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    height: 25px;
+    width: 25px;
+}
+
+.user-edit-close-button:hover {
+    cursor: pointer;
+}
+
+.dp-container {
+    text-align: center;
+}
+
+.dp-border {
+    border-radius: 50%;
+    background-color: #f1765b;
+    margin-bottom: 20px;
+    width: fit-content;
+    display: inline-block;
+}
+  
+.profile-picture {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin: 3px;
+}
+
+.user-display-name, .user-username, .user-email-id, .user-userrole {
+    display: flex;
+    width: 542px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.profile-footer-buttons {
+    display: flex;
+    width: 542px;
+    align-items: center;
+    margin-top: 35px;
+    margin-bottom: -10px;
+}
+
+.column-item-left {
+    flex: 1;
+    text-align: right;
+}
+
+.column-item-right {
+    flex: 1;
+    text-align: left;
+}
+
+.column-item-right-drop-down {
+    flex: 1;
+    margin-bottom: 13px;
+}
+
+.column-item-colon {
+    flex: 0.1;
+    text-align: center;
+    margin-left: 7px;
+    margin-right: 7px;
+}
+
+.button-delete-user {
+    border-color: rgb(243, 0, 0);
+    border-radius: 5px;
+    border-width: 2.5px;
+    border-style: solid;
+    color: rgb(243, 0, 0);
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 243px;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+
+.button-save-changes {
+    border-radius: 5px;
+    border-width: 2.5px;
+    border-style: solid;
+    width: 243px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #eeece8;
+    background-color: #0f1322;
+    border-color: #0f1322;
+    margin-right: -10px;
+    margin-left: -10px;
+}

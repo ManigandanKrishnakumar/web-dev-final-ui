@@ -1,0 +1,35 @@
+.App {
+  height: 100%;
+  display: flex;
+}
+
+:root {
+  --primary: #eeece8;
+  --primary-contrast: #0f1322;
+  --secondary: #f6f4f2;
+  --secondary-contrast: #0f1322;
+  --tertiary: #0f1322;
+  --tertiary-contrast: #fff;
+  --action: #f1765b;
+  --action-contrast: #fff;
+}
+
+.primary {
+  background-color: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.secondary {
+  background-color: var(--secondary);
+  color: var(--secondary-contrast);
+}
+
+.tertiary {
+  background-color: var(--tertiary);
+  color: var(--tertiary-contrast);
+}
+
+.action {
+  background-color: var(--action);
+  color: var(--action-contrast);
+}
