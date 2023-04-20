@@ -54,4 +54,26 @@
             }
         }
     }
+
+    #start-button {
+        border: none;
+        outline: none;
+        background-color: white;
+    }
+    .actions-container {
+       button {
+        background-color: red;
+       }
+    }
+
+    @media screen and (width < 430px)  { 
+        height: 25px;
+        border-radius: calc(25px / 2);
+        padding: 15px;
+        margin-left: 10px;
+
+        .label {
+            font-size: 0.9rem;
+        }
+    }
 }

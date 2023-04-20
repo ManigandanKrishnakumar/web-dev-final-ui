@@ -9,3 +9,5 @@ export { AuthButtonGroup } from "./AuthButtonGroup/AuthButtonGroup";
 export { SwitchUserButton } from "./SwitchUserButton/SwitchUserButton";
 export { Loader } from "./Loader/Loader";
 export { UserPreview } from "./UserPreview/UserPreview";
+export { SpeedTest } from "./SpeedTest/SpeedTest";
+export { NetworkProvider } from "./NetworkProvider/NetworkProvider";

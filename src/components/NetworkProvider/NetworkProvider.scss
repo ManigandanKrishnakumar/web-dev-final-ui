@@ -1,0 +1,19 @@
+#network-provider-container {
+    
+    .isp {
+        font-size: 2rem;
+        margin: 0;
+
+        @media screen and (width < 430px)  {
+            font-size: 1rem;
+            font-weight: 600;   
+        }
+    }
+    .city {
+        margin: 0;
+        @media screen and (width < 430px)  {
+            
+            font-weight: lighter;   
+        }
+    }
+}

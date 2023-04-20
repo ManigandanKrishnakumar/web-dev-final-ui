@@ -1,0 +1,76 @@
+#speed-test-container {
+    margin-top: 20px;
+    .speed-test-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .speed {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .title, .metric, .unit {
+            margin: 0;
+        }
+
+        .title {
+            font-weight: 600;
+            .icon {
+                margin-right: 5px;
+            }
+            #download-icon {
+                color: green;
+            }
+            #upload-icon {
+                color: #BF71FF;
+            }
+        }
+       
+        .metric {
+            font-size: 1.5rem;
+        }
+
+        .unit {
+            font-weight: lighter;
+        }
+
+        &.download-speed {
+            .metric {
+                color: green;
+            }
+        }
+
+        &.upload-speed {
+            .metric {
+                color: #BF71FF;
+            }
+        }
+    }
+
+    .results-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        font-size: 1.2rem;
+        animation: fadeIn 1s;
+        .label {
+            font-weight: lighter;
+        }
+        @media screen and (width < 430px)  {
+            font-size: 1rem;
+            margin-top: 10px;
+            p {
+                margin: 0;
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
