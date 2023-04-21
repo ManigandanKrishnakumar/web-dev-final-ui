@@ -8,23 +8,23 @@ import { AppContext } from "../../state-management/app-context";
 import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import { UsersListItem } from "../../components/UsersListItem/UsersListItem";
 import { UserEditPopup } from "../../components/UserEditPopup/UserEditPopup";
-import { API_ENDPOINTS } from '../../constants/apiConstants';
-import { SearchUser } from '../../services/SearchUser';
+import { API_ENDPOINTS } from "../../constants/apiConstants";
+import { SearchUser } from "../../services/SearchUser";
 import { AppError } from "../../models/AppError";
-import { SearchResultItem } from '../../components/SearchResult/SearchResultItem';
-import { useState } from 'react';
+import { SearchResultItem } from "../../components/SearchResult/SearchResultItem";
+import { useState } from "react";
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
   const { data, dispatch } = useContext(AppContext);
   const user = data[STATES.CURRENT_USER];
-  const [ showPopup, setShowPopup ] = React.useState(false);
-  const [ userToEditObj, setUserToEditObj ] = React.useState(null);
-  const [ websiteUsers, setWebsiteUsers ] = React.useState(null);
-  const [ errStatus, setErrStatus ] = React.useState(false);
-  const [ userRoleOfSpecificUser, setUserRoleOfSpecificUser ] = React.useState("Normal-User");
+  const [showPopup, setShowPopup] = React.useState(false);
+  const [userToEditObj, setUserToEditObj] = React.useState(null);
+  const [websiteUsers, setWebsiteUsers] = React.useState(null);
+  const [errStatus, setErrStatus] = React.useState(false);
+  const [userRoleOfSpecificUser, setUserRoleOfSpecificUser] =
+    React.useState("Normal-User");
   const [searchTerm, setSearchTerm] = useState("");
- 
 
   // if (window.location.pathname === '/admin-dashboard') {
   //   sessionStorage.setItem('adminDashboardUrl', window.location.href);
@@ -60,7 +60,7 @@ export const AdminDashboard = () => {
       } else {
         throw resJson;
       }
-    }catch(err){
+    } catch (err) {
       //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
@@ -85,7 +85,7 @@ export const AdminDashboard = () => {
       } else {
         throw resJson;
       }
-    }catch(err){
+    } catch (err) {
       //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
@@ -115,7 +115,7 @@ export const AdminDashboard = () => {
       } else {
         throw resJson;
       }
-    }catch(err){
+    } catch (err) {
       //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
@@ -132,74 +132,87 @@ export const AdminDashboard = () => {
     }
   }, []);
 
-  const handleSearchInputChange = event => {
-
+  const handleSearchInputChange = (event) => {
     setSearchTerm(event.target.value);
-
-      
   };
 
-  const handleClearSubmit = async(e) => {
+  const handleClearSubmit = async (e) => {
     e.preventDefault();
-      
   };
-
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
 
-
     dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
 
     try {
-      
       const result = await SearchUser(searchTerm);
 
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       if (!result || result.length === 0) {
-        throw new Error('No results found');
-      }    
+        throw new Error("No results found");
+      }
 
       setWebsiteUsers(result);
-    }catch(error){
+    } catch (error) {
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
-      dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: new AppError(error.message) });
+      dispatch({
+        type: ACTION_TYPES.SET_ERROR_STATUS,
+        payload: new AppError(error.message),
+      });
     }
-  }  
-  
+  };
+
   return (
     <div className="admin-dashboard-container">
       <PageHeading heading="Admin Dashboard" />
       <br />
-    <div className="search-container">
+      <div className="search-container">
         <label>Search for User:</label>
-        <input type="text" placeholder="Search by username" value={searchTerm} onChange={handleSearchInputChange} />
-        <button type="submit" id ="update" onClick={handleSearchSubmit}>Search</button>
-        <button type="submit" id ="update" onClick={handleClearSubmit}>Clear</button>
-    </div>
-      { websiteUsers && websiteUsers.map((websiteUser) => (
-        <UsersListItem 
-          username={websiteUser.user_name}  
-          displayName={JSON.parse(websiteUser.meta_data).displayName}
-          dp={JSON.parse(websiteUser.meta_data).dp}
-          email={JSON.parse(websiteUser.meta_data).email}
-          userRole={websiteUser.user_role}
-          handleUsersListItemClick={handleUsersListItemClick}
+        <input
+          type="text"
+          placeholder="Search by username"
+          value={searchTerm}
+          onChange={handleSearchInputChange}
+        />
+        <button type="submit" id="update" onClick={handleSearchSubmit}>
+          Search
+        </button>
+        <button type="submit" id="update" onClick={handleClearSubmit}>
+          Clear
+        </button>
+      </div>
+      {websiteUsers &&
+        websiteUsers.map((websiteUser) => (
+          <UsersListItem
+            username={websiteUser.user_name}
+            displayName={JSON.parse(websiteUser.meta_data).displayName}
+            dp={JSON.parse(websiteUser.meta_data).dp}
+            email={JSON.parse(websiteUser.meta_data).email}
+            userRole={websiteUser.user_role}
+            handleUsersListItemClick={handleUsersListItemClick}
           />
-      )) }
+        ))}
 
-      { showPopup && <UserEditPopup
-        username={userToEditObj.user_name}  
-        displayName={JSON.parse(userToEditObj.meta_data).displayName}
-        dp={JSON.parse(userToEditObj.meta_data).dp}
-        email={JSON.parse(userToEditObj.meta_data).email}
-        setShowPopup={setShowPopup}
-        handleDeleteUser={handleDeleteUser}
-        handleUserRoleChange={handleUserRoleChange}
-        userRoleState={userRoleOfSpecificUser}
-        setUserRoleState={setUserRoleOfSpecificUser}
-      /> }
-      { errStatus && <div><br /><p>Sorry, something went wrong. Please try again.</p></div> }
+      {showPopup && (
+        <UserEditPopup
+          username={userToEditObj.user_name}
+          displayName={JSON.parse(userToEditObj.meta_data).displayName}
+          dp={JSON.parse(userToEditObj.meta_data).dp}
+          email={JSON.parse(userToEditObj.meta_data).email}
+          setShowPopup={setShowPopup}
+          handleDeleteUser={handleDeleteUser}
+          handleUserRoleChange={handleUserRoleChange}
+          userRoleState={userRoleOfSpecificUser}
+          setUserRoleState={setUserRoleOfSpecificUser}
+        />
+      )}
+      {errStatus && (
+        <div>
+          <br />
+          <p>Sorry, something went wrong. Please try again.</p>
+        </div>
+      )}
     </div>
   );
 };

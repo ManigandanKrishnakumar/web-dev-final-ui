@@ -71,7 +71,8 @@
     }
 
     @media screen  and (width <= 430px) {
-        padding: 2px 5px;
+        padding: 5px 0;
+        padding-right: 5px;
 
         .id-section, .dp-sec, .user-info-sec, .timestamp-sec, .actions-sec {
             flex: 1;
@@ -83,6 +84,9 @@
 
          .id-section {
             flex: 0.5;
+            .label, .value {
+                font-size: 0.9rem;
+            }
          }
 
          .user-info-sec {
@@ -99,8 +103,21 @@
 
          .timestamp-sec {
             
-            .label, .value {
-                font-size: 0.8rem;
+            display: none;
+         }
+
+         .actions-sec {
+            align-items: center;
+            
+            button {
+                width: 100%;
+                font-size: 0.7rem;
+                border-width: 1.5px;
+
+                &.delete {
+                    margin: 0;
+                    margin-top: 5px;
+                }
             }
          }
      

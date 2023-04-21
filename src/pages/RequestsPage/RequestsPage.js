@@ -5,13 +5,17 @@ import { socket } from "../../sockets/socket";
 import { AppContext } from "../../state-management/app-context";
 import axiosConfig from "../../axiosConfig/axios-config";
 import { BACK_END_POINTS } from "../../apiconstants/apiConstants";
-import { ACTION_TYPES } from "../../state-management/constants";
+import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import { AppError } from "../../models/AppError";
 import { RequestItem } from "../../components";
+import { useNavigate } from "react-router";
+import { USER_ROLES } from "../../constants/appConstants";
 
 export const RequestsPage = () => {
   const { data, dispatch } = useContext(AppContext);
-  const [requests, setRequests] = useState([]);
+  const navigate = useNavigate();
+
+  // const [requests, setRequests] = useState([]);
 
   const fetchAllRequests = async () => {
     try {
@@ -27,7 +31,7 @@ export const RequestsPage = () => {
       const data = await res.json();
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
 
-      setRequests(data.payload);
+      dispatch({ type: ACTION_TYPES.SET_REQUESTS, payload: data.payload });
     } catch (error) {
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       dispatch({
@@ -37,27 +41,35 @@ export const RequestsPage = () => {
       console.log(error);
     }
   };
-  useEffect(() => {
-    fetchAllRequests();
-  }, []);
 
   useEffect(() => {
-    socket.connect();
-
-    socket.on("access-requested", (val) => {
-      fetchAllRequests();
-    });
-
-    return () => {
-      socket.disconnect();
-    };
+    if (
+      (data[STATES.CURRENT_USER].userRole === USER_ROLES.ADMIN &&
+        data[STATES.IS_LOGGED_IN]) !== true
+    ) {
+      navigate("/");
+    } else {
+      //  fetchAllRequests();
+    }
   }, []);
+
+  //   useEffect(() => {
+  //     socket.connect();
+
+  //     socket.on("access-requested", (val) => {
+  //       fetchAllRequests();
+  //     });
+
+  //     return () => {
+  //       socket.disconnect();
+  //     };
+  //   }, []);
 
   return (
     <div id="requests-page-container">
       <h1> Requests Page</h1>
       <div className="requests-container">
-        {requests.map((request, index) => {
+        {data[STATES.REQUESTS].map((request, index) => {
           return <RequestItem request={request} key={index} />;
         })}
       </div>

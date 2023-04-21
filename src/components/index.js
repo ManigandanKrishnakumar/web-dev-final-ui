@@ -14,3 +14,4 @@ export { NetworkProvider } from "./NetworkProvider/NetworkProvider";
 export { SaveError } from "./SaveError/SaveError";
 export { SpeedTestAccessError } from "./SpeedTestAccessError/SpeedTestAccessError";
 export { RequestItem } from "./RequestItem/RequestItem";
+export { RequestsBadge } from "./RequestsBadge/RequestsBadge";
