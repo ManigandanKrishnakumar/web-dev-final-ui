@@ -4,10 +4,12 @@ import { BsCloudDownload, BsCloudUpload } from "react-icons/bs";
 
 import "./SpeedTest.scss";
 import { NetworkProvider } from "../NetworkProvider/NetworkProvider";
-import { ACTION_TYPES } from "../../state-management/constants";
+import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import axiosConfig from "../../axiosConfig/axios-config";
 import { BACK_END_POINTS } from "../../apiconstants/apiConstants";
 import { AppContext } from "../../state-management/app-context";
+import { SaveError } from "../SaveError/SaveError";
+import { SpeedTestAccessError } from "../SpeedTestAccessError/SpeedTestAccessError";
 
 export const SpeedTest = () => {
   const [networkProvider, setNetworkProvider] = useState("");
@@ -16,12 +18,17 @@ export const SpeedTest = () => {
   const [downloadSpeed, setDownloadSpeed] = useState("N/A");
   const [uploadSpeed, setUploadSpeed] = useState("N/A");
   const [error, setError] = useState();
-  const { dispatch } = useContext(AppContext);
+  const { data, dispatch } = useContext(AppContext);
   const [saveError, setSaveError] = useState();
 
   useEffect(() => {
+    setResult(null);
+    setError(false);
+    setSaveError(false);
+    setDownloadSpeed("N/A");
+    setUploadSpeed("N/A");
     SoMApiInit();
-  }, []);
+  }, [data[STATES.CURRENT_USER]]);
 
   const saveResult = async () => {
     try {
@@ -34,7 +41,7 @@ export const SpeedTest = () => {
         throw new Error(JSON.stringify(res.data));
       }
     } catch (e) {
-      console.log("ERR on Save : ", e);
+      setSaveError(true);
     }
   };
 
@@ -61,7 +68,11 @@ export const SpeedTest = () => {
   };
 
   const startTest = () => {
+    // console.log(data[STATES.CURRENT_USER].apiKey);
+    window.SomApi.account = data[STATES.CURRENT_USER].apiKey;
     setResult(null);
+    setError(false);
+    setSaveError(false);
     setDownloadSpeed("N/A");
     setUploadSpeed("N/A");
     window.SomApi.startTest();
@@ -69,7 +80,7 @@ export const SpeedTest = () => {
 
   const SoMApiInit = () => {
     const api = window.SomApi;
-    api.account = ""; // YOUR API KEY
+    // api.account = data[STATES.CURRENT_USER["apiKey"]] || undefined; // YOUR API KEY
     api.domainName = "localhost";
     api.config.sustainTime = 4;
     api.config.testServerEnabled = true;
@@ -131,19 +142,14 @@ export const SpeedTest = () => {
           </p>
         </div>
       )}
-
-      {error && (
-        <div className="error-message-container">
-          <p>
-            Sorry, you don't have access to do speed test. Please click the
-            following button to request access
-          </p>
-          <button>Request access</button>
-        </div>
-      )}
-
+      {saveError && <SaveError />}
+      {error && <SpeedTestAccessError />}
       <div className="actions-container">
-        <button className="btn" onClick={startTest}>
+        <button
+          className="btn"
+          onClick={startTest}
+          disabled={!data[STATES.IS_LOGGED_IN]}
+        >
           Start Test
         </button>
 

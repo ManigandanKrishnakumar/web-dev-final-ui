@@ -95,6 +95,22 @@
            opacity: 0.5;
         }
     }
+
+    
+    .error-message-container {
+        margin-top: 20px;
+        p {
+            color: red;
+        } 
+
+        &.speed {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+    }
+
 }
 
 @keyframes fadeIn {

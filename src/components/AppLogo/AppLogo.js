@@ -1,14 +1,14 @@
 import React from "react";
 
-import { GiHouseKeys } from "react-icons/gi";
+import { BsSpeedometer2 } from "react-icons/bs";
 
 import "./AppLogo.scss";
 
 export const AppLogo = () => {
   return (
     <div id="app-logo">
-      <GiHouseKeys id="app-icon" />
-      <p>Asym Auth App</p>
+      <BsSpeedometer2 id="app-icon" />
+      <p>Speed Test</p>
     </div>
   );
 };
