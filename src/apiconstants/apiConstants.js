@@ -15,6 +15,7 @@ export const BACK_END_POINTS = {
   },
   SPEED_TEST: {
     SAVE_RESULT: `${BackEndServer_BASE_URL}/api/speed-test/save`,
+    FETCH_RESULT: `${BackEndServer_BASE_URL}/api/speed-test/fetch`,
   },
   REQUESTS: {
     FETCH_ALL: `${BackEndServer_BASE_URL}/api/access-requests/fetch-all`,

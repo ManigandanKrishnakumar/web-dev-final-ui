@@ -20,6 +20,7 @@ export const SpeedTest = () => {
   const [error, setError] = useState();
   const { data, dispatch } = useContext(AppContext);
   const [saveError, setSaveError] = useState();
+  const [pastTests, setPastTests] = useState([]);
 
   useEffect(() => {
     setResult(null);
@@ -28,10 +29,37 @@ export const SpeedTest = () => {
     setDownloadSpeed("N/A");
     setUploadSpeed("N/A");
     SoMApiInit();
+    testHistory();
+    if (!data[STATES.IS_LOGGED_IN]) {
+      setPastTests([]);
+    }
   }, [data[STATES.CURRENT_USER]]);
+
+  const testHistory = async () => {
+    const res = await fetch(BACK_END_POINTS.SPEED_TEST.FETCH_RESULT, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log("Fetching Speed History Data!");
+    console.log(data.payload);
+    setPastTests(data.payload);
+  };
 
   const saveResult = async () => {
     try {
+      let testObject = result;
+      testObject = {
+        ...testObject,
+        isp: networkProvider.isp,
+        address:
+          networkProvider.city +
+          ", " +
+          networkProvider.region +
+          ", " +
+          networkProvider.countryCode,
+      };
+      console.log(testObject);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
       const res = await fetch(BACK_END_POINTS.SPEED_TEST.SAVE_RESULT, {
         method: "POST",
@@ -39,7 +67,7 @@ export const SpeedTest = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(result),
+        body: JSON.stringify(testObject),
       });
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       const data = await res.json();
@@ -164,6 +192,62 @@ export const SpeedTest = () => {
           Save Result
         </button>
       </div>
+      {pastTests.length != 0 && (
+        <h2 className="past-test-heading">History of Speed Tests</h2>
+      )}
+      {pastTests.length != 0 &&
+        pastTests.map((pastTest) => {
+          return (
+            <div id="speed-history-container">
+              <div className="speed-test-info">
+                <div id="network-provider-container">
+                  <p className="isp-list">{pastTest.isp}</p>
+                  <p className="city">{pastTest.address}</p>
+                </div>
+
+                <div className="speed download-speed">
+                  <p className="title">
+                    <BsCloudDownload id="download-icon" className="icon" />
+                    <span className="download-tag">Download</span>
+                  </p>
+                  <p className="metric">{pastTest.download}</p>
+                  <p className="unit">Mbps</p>
+                </div>
+
+                <div className="speed upload-speed">
+                  <p className="title">
+                    <BsCloudUpload id="upload-icon" className="icon" />
+                    <span className="upload-tag">Upload</span>
+                  </p>
+                  <p className="metric">{pastTest.upload}</p>
+                  <p className="unit">Mbps</p>
+                </div>
+              </div>
+              <div className="results-container">
+                <p>
+                  <span className="label"> IP : </span>
+                  <span>{pastTest.ip_address}</span>
+                </p>
+                <p>
+                  <span className="label"> Date : </span>
+                  <span>
+                    {new Date(pastTest.testDate).toLocaleDateString()}
+                  </span>
+                </p>
+
+                <p>
+                  <span className="label"> Max Download : </span>
+                  <span>{pastTest.maxDownload}</span>
+                </p>
+
+                <p>
+                  <span className="label"> Max Upload : </span>
+                  <span>{pastTest.maxUpload}</span>
+                </p>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 };
