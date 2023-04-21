@@ -3,7 +3,7 @@ export const API_URLS = {
   HTTPS: "https://",
   DOMAIN: "localhost",
   COLON: ":",
-  PORT: "5000",
+  PORT: "3000",
   ENDPOINTS: {
     API_USER_CHECK_USERNAME: "/api/user/check-username",
     API_USER_CREATE_USER: "/api/user/create-user",

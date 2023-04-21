@@ -2,51 +2,38 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    max-width: 900px; 
+    justify-content: center;
   }
   
-  label {
-    flex: 0 0 auto;
-    margin-right: 5px;
+  .search-container label {
+    flex-basis: 100%;
+    margin-bottom: 10px;
   }
   
-  input[type="text"] {
-    flex: 1 1 auto;
-    max-width: 200px;
-    padding: 5px 10px;
-    font-size: 14px;
+  .search-container input[type="text"] {
+    flex-basis: 100%;
+    margin-bottom: 10px;
   }
   
-  button[type="submit"] {
-    // width: 2px;
-    height: 10px;
-    // margin-left: 5px;
-    padding: 2px;
-    font-size: 14px;
+  .search-container button {
+    flex-basis: 50%;
   }
   
-//   #update {
-//     margin-top: 10px;
-//   }
-  
-  @media (max-width: 700px) {
+  @media screen and (min-width: 800px) {
     .search-container {
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
     }
     
-    label,
-    input[type="text"],
-    button[type="submit"] {
-      flex: 0 1 100%;
+    .search-container label {
+      flex-basis: auto;
+      margin-right: 10px;
     }
     
-    button[type="submit"] {
-      margin-top: 10px;
-    }
-    
-    #update {
-      margin-top: 0;
+    .search-container input[type="text"] {
+      flex-basis: auto;
+      margin-right: 10px;
     }
   }
+  
+  
   
