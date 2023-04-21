@@ -20,6 +20,7 @@ export const SpeedTest = () => {
   const [error, setError] = useState();
   const { data, dispatch } = useContext(AppContext);
   const [saveError, setSaveError] = useState();
+  const [pastTests, setPastTests] = useState([]);
 
   useEffect(() => {
     setResult(null);
@@ -28,7 +29,19 @@ export const SpeedTest = () => {
     setDownloadSpeed("N/A");
     setUploadSpeed("N/A");
     SoMApiInit();
+    testHistory();
   }, [data[STATES.CURRENT_USER]]);
+
+  const testHistory = async () => {
+    const res = await fetch(BACK_END_POINTS.SPEED_TEST.FETCH_RESULT, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log("Fetching Speed History Data!");
+    console.log(data.payload);
+    setPastTests(data.payload);
+  };
 
   const saveResult = async () => {
     try {
@@ -76,7 +89,8 @@ export const SpeedTest = () => {
 
   const startTest = () => {
     // console.log(data[STATES.CURRENT_USER].apiKey);
-    window.SomApi.account = data[STATES.CURRENT_USER].apiKey;
+    window.SomApi.account =
+      data[STATES.CURRENT_USER].apiKey || "SOM6441515c70a8c";
     setResult(null);
     setError(false);
     setSaveError(false);
@@ -164,6 +178,59 @@ export const SpeedTest = () => {
           Save Result
         </button>
       </div>
+      {pastTests.length &&
+        pastTests.map((pastTest) => {
+          return (
+            <div id="speed-history-container">
+              <h2>History of Speed Tests</h2>
+              <div className="speed-test-info">
+                <div id="network-provider-container">
+                  <p className="isp">{pastTest.hostname}</p>
+                </div>
+
+                <div className="speed download-speed">
+                  <p className="title">
+                    <BsCloudDownload id="download-icon" className="icon" />
+                    Download
+                  </p>
+                  <p className="metric">{pastTest.download}</p>
+                  <p className="unit">Mbps</p>
+                </div>
+
+                <div className="speed upload-speed">
+                  <p className="title">
+                    <BsCloudUpload id="upload-icon" className="icon" />
+                    Upload
+                  </p>
+                  <p className="metric">{pastTest.upload}</p>
+                  <p className="unit">Mbps</p>
+                </div>
+              </div>
+              <div className="results-container">
+                <p>
+                  <span className="label"> IP : </span>
+                  <span>{pastTest.ip_address}</span>
+                </p>
+                <p>
+                  <span className="label"> Date : </span>
+                  <span>
+                    {new Date(pastTest.testDate).toLocaleDateString()}
+                  </span>
+                </p>
+
+                <p>
+                  <span className="label"> Max Download : </span>
+                  <span>{pastTest.maxDownload}</span>
+                </p>
+
+                <p>
+                  <span className="label"> Max Upload : </span>
+                  <span>{pastTest.maxUpload}</span>
+                </p>
+              </div>
+            </div>
+          );
+        })}
     </div>
   );
 };
