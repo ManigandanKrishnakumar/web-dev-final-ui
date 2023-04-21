@@ -6,10 +6,15 @@ import { STATES } from "../../state-management/constants";
 import { AppLogo } from "../AppLogo/AppLogo";
 import { NavItem } from "../NavItem/NavItem";
 import { UserPreview } from "../UserPreview/UserPreview";
+import { useState } from "react";
+import Hamburger from 'hamburger-react';
 
 import "./SideBar.scss";
 
 export const SideBar = () => {
+
+  const [showSidebar, setShowSidebar] = useState(false);
+
   const { data } = useContext(AppContext);
   const shouldHide = (url) => {
     const hideMap = {
@@ -40,7 +45,12 @@ export const SideBar = () => {
   };
 
   return (
-    <div id="side-bar-container">
+    <>
+    <button className={`sidebar-toggle ${showSidebar ? 'show' : ''}`}>
+        <Hamburger toggled={showSidebar} toggle={setShowSidebar} />    
+    </button>
+
+    <div id="side-bar-container" className={`${showSidebar ? "show" : ""} ${showSidebar ? "overlay" : ""}`}>
       <div>
         <AppLogo />
         {PAGES.map((page) => {
@@ -56,5 +66,6 @@ export const SideBar = () => {
       </div>
       <UserPreview />
     </div>
+    </>
   );
 };

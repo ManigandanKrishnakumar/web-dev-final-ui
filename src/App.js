@@ -38,6 +38,13 @@ function App() {
     }
   }, [user]);
 
+
+  // useEffect(() => {
+  //   localStorage.setItem('path', window.location.pathname);
+  // }, []);
+  // const storedPath = localStorage.getItem('path');
+  // console.log(storedPath);
+
   return (
     <AppContextProvider value={{ data, dispatch }}>
       <div className="App">
