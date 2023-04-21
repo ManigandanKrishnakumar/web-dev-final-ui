@@ -35,6 +35,19 @@ export const SpeedTest = () => {
     }
   }, [data[STATES.CURRENT_USER]]);
 
+  const deleteHistory = async () => {
+    const res = await fetch(BACK_END_POINTS.SPEED_TEST.DELETE_RESULT, {
+      method: "GET",
+      credentials: "include",
+    });
+    const data = await res.json();
+    console.log("Deleting History Data!");
+    if (!data.isSuccess) {
+      throw new Error(JSON.stringify(res.data));
+    }
+    setPastTests([]);
+  };
+
   const testHistory = async () => {
     const res = await fetch(BACK_END_POINTS.SPEED_TEST.FETCH_RESULT, {
       method: "GET",
@@ -194,7 +207,12 @@ export const SpeedTest = () => {
         </button>
       </div>
       {pastTests.length != 0 && (
-        <h2 className="past-test-heading">History of Speed Tests</h2>
+        <div className="history-title">
+          <h2 className="past-test-heading">History of Speed Tests</h2>
+          <button className="clear-button" onClick={deleteHistory}>
+            Clear All
+          </button>
+        </div>
       )}
       {pastTests.length != 0 &&
         pastTests.map((pastTest) => {
