@@ -41,12 +41,13 @@ export const SpeedTest = () => {
         },
         body: JSON.stringify(result),
       });
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       const data = await res.json();
-      if (data.isSuccess) {
+      if (!data.isSuccess) {
         throw new Error(JSON.stringify(res.data));
       }
-      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     } catch (e) {
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       setSaveError(true);
     }
   };
