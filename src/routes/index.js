@@ -4,6 +4,7 @@ import {
   AdminDashboard,
   Home,
   ProtectedPage,
+  RequestsPage,
   SignIn,
   TestFunctionality,
 } from "../pages";
@@ -18,6 +19,7 @@ export const RouterOutlet = () => {
       <Route path={URLS.signIn} element={<SignIn />} />
       <Route path={URLS.signUp} element={<SignUp />} />
       <Route path={URLS.userInfo} element={<ProtectedPage />} />
+      <Route path={URLS.requests} element={<RequestsPage />}></Route>
       <Route path="/test-functionality" element={<TestFunctionality />} />
     </Routes>
   );

@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     async function Checklogin() {
       try {
-        const result = await fetch("http://localhost:3000/api/user/logged-in", {
+        const result = await fetch("http://localhost:5000/api/user/logged-in", {
           method: "GET",
           credentials: "include",
         });
