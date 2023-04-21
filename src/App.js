@@ -71,6 +71,7 @@ function App() {
         const userInfo = await result.json();
         data[STATES.IS_LOGGED_IN] = true;
         data[STATES.CURRENT_USER] = userInfo;
+        console.log(">>>", userInfo);
         setUser(userInfo);
         await fetchAllRequests();
 
