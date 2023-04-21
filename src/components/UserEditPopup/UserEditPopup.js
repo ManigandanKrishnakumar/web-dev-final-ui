@@ -39,6 +39,7 @@ export const UserEditPopup = ({
                             <select value={userRoleState} onChange={(e) => setUserRoleState(e.target.value)}>
                                 <option value="Normal-User">Normal-User</option>
                                 <option value="Admin">Admin</option>
+                                <option value="No-Access-User">No Access</option>
                             </select>
                         </div>
                     </div>

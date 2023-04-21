@@ -4,3 +4,4 @@ export { SignIn } from "./SignIn/SignIn";
 export { SignUp } from "./SignUp/SignUp";
 export { TestFunctionality } from "./TestFunctionality/TestFunctionality";
 export { AdminDashboard } from "./AdminDashboard/AdminDashboard";
+export { RequestsPage } from "./RequestsPage/RequestsPage";

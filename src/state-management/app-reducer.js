@@ -2,7 +2,6 @@ import { ACTION_TYPES, STATES } from "./constants";
 
 export const appReducer = (state, action) => {
   switch (action.type) {
-    
     case ACTION_TYPES.SET_LOGIN_STATUS: {
       return {
         ...state,
@@ -31,9 +30,15 @@ export const appReducer = (state, action) => {
       };
     }
 
+    case ACTION_TYPES.SET_REQUESTS: {
+      return {
+        ...state,
+        [STATES.REQUESTS]: action.payload,
+      };
+    }
+
     default: {
       return state;
     }
   }
 };
-

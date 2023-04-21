@@ -1,122 +1,268 @@
 #speed-test-container {
+  margin-top: 20px;
+  .speed-test-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .speed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title,
+    .metric,
+    .unit {
+      margin: 0;
+    }
+
+    .title {
+      font-weight: 600;
+      .icon {
+        margin-right: 5px;
+      }
+      #download-icon {
+        color: green;
+      }
+      #upload-icon {
+        color: #bf71ff;
+      }
+    }
+
+    .metric {
+      font-size: 1.5rem;
+    }
+
+    .unit {
+      font-weight: lighter;
+    }
+
+    &.download-speed {
+      .metric {
+        color: green;
+      }
+    }
+
+    &.upload-speed {
+      .metric {
+        color: #bf71ff;
+      }
+    }
+  }
+
+  .results-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 1.2rem;
+    animation: fadeIn 1s;
+    .label {
+      font-weight: lighter;
+    }
+    @media screen and (width < 430px) {
+      font-size: 1rem;
+      margin-top: 10px;
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .actions-container {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
-    .speed-test-info {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .speed {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .title, .metric, .unit {
-            margin: 0;
-        }
-
-        .title {
-            font-weight: 600;
-            .icon {
-                margin-right: 5px;
-            }
-            #download-icon {
-                color: green;
-            }
-            #upload-icon {
-                color: #BF71FF;
-            }
-        }
-       
-        .metric {
-            font-size: 1.5rem;
-        }
-
-        .unit {
-            font-weight: lighter;
-        }
-
-        &.download-speed {
-            .metric {
-                color: green;
-            }
-        }
-
-        &.upload-speed {
-            .metric {
-                color: #BF71FF;
-            }
-        }
-    }
-
-    .results-container {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        font-size: 1.2rem;
-        animation: fadeIn 1s;
-        .label {
-            font-weight: lighter;
-        }
-        @media screen and (width < 430px)  {
-            font-size: 1rem;
-            margin-top: 10px;
-            p {
-                margin: 0;
-            }
-        }
-    }
-
-    .actions-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        
-        button {
-            &:last-child {
-                margin-left: 20px;
-            }
-        }
-        
-    }
 
     button {
-        border: none;
-        outline: none;
-        background: white;
-        padding: 10px;
-        border: 2.5px solid #0F1322;
-        color: #0F1322;
-        border-radius: 25px;
-        font-weight: 600;
+      &:last-child {
+        margin-left: 20px;
+      }
+    }
+  }
 
-        
+  button {
+    border: none;
+    outline: none;
+    background: white;
+    padding: 10px;
+    border: 2.5px solid #0f1322;
+    color: #0f1322;
+    border-radius: 25px;
+    font-weight: 600;
 
-        &:disabled {
-           opacity: 0.5;
-        }
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .error-message-container {
+    margin-top: 20px;
+    p {
+      color: red;
     }
 
-    
-    .error-message-container {
-        margin-top: 20px;
-        p {
-            color: red;
-        } 
-
-        &.speed {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
+    &.speed {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
     }
-
+  }
+  .past-test-heading {
+    margin-top: 20px;
+    @media screen and (width < 960px) {
+      font-size: 1.5rem;
+    }
+    @media screen and (width < 600px) {
+      font-size: 1rem;
+      width: 200px;
+    }
+  }
 }
 
 @keyframes fadeIn {
-    from{
-        opacity: 0;
-    } to {
-        opacity: 1;
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#speed-history-container {
+  .speed-test-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .speed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title,
+    .metric,
+    .unit {
+      margin: 0;
     }
+
+    .title {
+      font-weight: 600;
+      .icon {
+        margin-right: 5px;
+      }
+      #download-icon {
+        color: green;
+      }
+      #upload-icon {
+        color: #bf71ff;
+      }
+    }
+
+    .metric {
+      font-size: 1.5rem;
+    }
+
+    .unit {
+      font-weight: lighter;
+    }
+
+    &.download-speed {
+      .metric {
+        color: green;
+      }
+    }
+
+    &.upload-speed {
+      .metric {
+        color: #bf71ff;
+      }
+    }
+  }
+
+  .download-tag {
+    @media screen and (width < 960px) {
+      display: none;
+    }
+  }
+
+  .upload-tag {
+    @media screen and (width < 960px) {
+      display: none;
+    }
+  }
+
+  .isp-list {
+    font-size: 2rem;
+    margin: 0;
+
+    @media screen and (width < 960px) {
+      font-size: 1.5rem;
+    }
+    @media screen and (width < 600px) {
+      font-size: 1rem;
+      width: 200px;
+    }
+  }
+  .results-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    font-size: 1.2rem;
+    animation: fadeIn 1s;
+    .label {
+      font-weight: lighter;
+    }
+    @media screen and (width < 960px) {
+      display: none;
+    }
+    @media screen and (width < 430px) {
+      font-size: 1rem;
+      margin-top: 10px;
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .actions-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    button {
+      &:last-child {
+        margin-left: 20px;
+      }
+    }
+  }
+
+  button {
+    border: none;
+    outline: none;
+    background: white;
+    padding: 10px;
+    border: 2.5px solid #0f1322;
+    color: #0f1322;
+    border-radius: 25px;
+    font-weight: 600;
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .error-message-container {
+    margin-top: 20px;
+    p {
+      color: red;
+    }
+
+    &.speed {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
 }
