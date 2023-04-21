@@ -10,6 +10,7 @@ import { BACK_END_POINTS } from "../../apiconstants/apiConstants";
 import { AppContext } from "../../state-management/app-context";
 import { SaveError } from "../SaveError/SaveError";
 import { SpeedTestAccessError } from "../SpeedTestAccessError/SpeedTestAccessError";
+import { AppError } from "../../models/AppError";
 
 export const SpeedTest = () => {
   const [networkProvider, setNetworkProvider] = useState("");
@@ -103,9 +104,34 @@ export const SpeedTest = () => {
     }
   };
 
-  const startTest = () => {
+  const fetchUser = async () => {
+    try {
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
+      const res = await fetch(BACK_END_POINTS.USER_INFO.LOGGED_IN, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
+      const data = await res.json();
+      return data.apiKey;
+    } catch (error) {
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
+      dispatch({
+        type: ACTION_TYPES.SET_ERROR_STATUS,
+        payload: new AppError("Unable to fetch API key"),
+      });
+      console.log(error);
+      return "";
+    }
+  };
+
+  const startTest = async () => {
     // console.log(data[STATES.CURRENT_USER].apiKey);
-    window.SomApi.account = data[STATES.CURRENT_USER].apiKey;
+    const apiKey = await fetchUser();
+    window.SomApi.account = apiKey;
     setResult(null);
     setError(false);
     setSaveError(false);
