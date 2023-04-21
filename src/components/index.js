@@ -11,3 +11,5 @@ export { Loader } from "./Loader/Loader";
 export { UserPreview } from "./UserPreview/UserPreview";
 export { SpeedTest } from "./SpeedTest/SpeedTest";
 export { NetworkProvider } from "./NetworkProvider/NetworkProvider";
+export { SaveError } from "./SaveError/SaveError";
+export { SpeedTestAccessError } from "./SpeedTestAccessError/SpeedTestAccessError";
