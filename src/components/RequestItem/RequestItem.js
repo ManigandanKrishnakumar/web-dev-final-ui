@@ -5,6 +5,7 @@ import { UserDisplayPicture } from "../UserDisplayPicture/UserDisplayPicture";
 
 export const RequestItem = ({ request, approveRequest, deleteRequest }) => {
   const meta_data = JSON.parse(request.meta_data);
+
   return (
     <div className="request-item">
       <div className="id-section">

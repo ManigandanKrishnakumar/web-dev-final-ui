@@ -18,5 +18,7 @@ export const BACK_END_POINTS = {
   },
   REQUESTS: {
     FETCH_ALL: `${BackEndServer_BASE_URL}/api/access-requests/fetch-all`,
+    DELETE: `${BackEndServer_BASE_URL}/api/access-requests/delete`,
+    APPROVE_REQUEST: `${BackEndServer_BASE_URL}/api/access-requests/approve`,
   },
 };
