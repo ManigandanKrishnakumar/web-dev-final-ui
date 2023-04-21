@@ -30,6 +30,9 @@ export const SpeedTest = () => {
     setUploadSpeed("N/A");
     SoMApiInit();
     testHistory();
+    if (!data[STATES.IS_LOGGED_IN]) {
+      setPastTests([]);
+    }
   }, [data[STATES.CURRENT_USER]]);
 
   const testHistory = async () => {
@@ -45,6 +48,18 @@ export const SpeedTest = () => {
 
   const saveResult = async () => {
     try {
+      let testObject = result;
+      testObject = {
+        ...testObject,
+        isp: networkProvider.isp,
+        address:
+          networkProvider.city +
+          ", " +
+          networkProvider.region +
+          ", " +
+          networkProvider.countryCode,
+      };
+      console.log(testObject);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
       const res = await fetch(BACK_END_POINTS.SPEED_TEST.SAVE_RESULT, {
         method: "POST",
@@ -52,7 +67,7 @@ export const SpeedTest = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(result),
+        body: JSON.stringify(testObject),
       });
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       const data = await res.json();
@@ -178,20 +193,23 @@ export const SpeedTest = () => {
           Save Result
         </button>
       </div>
-      {pastTests.length &&
+      {pastTests.length != 0 && (
+        <h2 className="past-test-heading">History of Speed Tests</h2>
+      )}
+      {pastTests.length != 0 &&
         pastTests.map((pastTest) => {
           return (
             <div id="speed-history-container">
-              <h2>History of Speed Tests</h2>
               <div className="speed-test-info">
                 <div id="network-provider-container">
-                  <p className="isp">{pastTest.hostname}</p>
+                  <p className="isp-list">{pastTest.isp}</p>
+                  <p className="city">{pastTest.address}</p>
                 </div>
 
                 <div className="speed download-speed">
                   <p className="title">
                     <BsCloudDownload id="download-icon" className="icon" />
-                    Download
+                    <span className="download-tag">Download</span>
                   </p>
                   <p className="metric">{pastTest.download}</p>
                   <p className="unit">Mbps</p>
@@ -200,7 +218,7 @@ export const SpeedTest = () => {
                 <div className="speed upload-speed">
                   <p className="title">
                     <BsCloudUpload id="upload-icon" className="icon" />
-                    Upload
+                    <span className="upload-tag">Upload</span>
                   </p>
                   <p className="metric">{pastTest.upload}</p>
                   <p className="unit">Mbps</p>
