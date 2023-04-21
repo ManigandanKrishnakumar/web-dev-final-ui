@@ -13,17 +13,17 @@ export const UsersListItem = ({
     return (
         <div className="users-list-item" onClick={() => handleUsersListItemClick(username)}>
             <div className="user-dp">
-                 <img className="dp" src={dp} alt="dp"/>
+                 <img className="dp" src={dp} />
             </div>
             <div  className="names">
-                <h4>{displayName}</h4>
-                <i>@{username}</i>
+                <i><b>{username}</b></i>
+                <div>@{displayName}</div>
             </div>
             <div className="user-email">
-                <p><b>{email}</b></p>
+                <p>{email}</p>
             </div>
             <div className="user-role">
-                <p><b>{userRole}</b></p>
+                <p>{userRole}</p>
             </div>
         </div>
     );

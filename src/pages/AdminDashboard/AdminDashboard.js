@@ -11,8 +11,7 @@ import { UserEditPopup } from "../../components/UserEditPopup/UserEditPopup";
 import { API_ENDPOINTS } from "../../constants/apiConstants";
 import { SearchUser } from "../../services/SearchUser";
 import { AppError } from "../../models/AppError";
-import { SearchResultItem } from "../../components/SearchResult/SearchResultItem";
-import { useState } from "react";
+import { useState } from 'react';
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -25,19 +24,6 @@ export const AdminDashboard = () => {
   const [userRoleOfSpecificUser, setUserRoleOfSpecificUser] =
     React.useState("Normal-User");
   const [searchTerm, setSearchTerm] = useState("");
-
-  // if (window.location.pathname === '/admin-dashboard') {
-  //   sessionStorage.setItem('adminDashboardUrl', window.location.href);
-  // }
-
-  // window.onload = function() {
-  //   const adminDashboardUrl = sessionStorage.getItem('adminDashboardUrl');
-  //   console.log(window.location.href);
-  //   console.log(adminDashboardUrl && window.location.href === adminDashboardUrl);
-  //   if (adminDashboardUrl && window.location.href === adminDashboardUrl) {
-  //       navigate(adminDashboardUrl);
-  //   }
-  // };
 
   const handleUsersListItemClick = (usernameToEdit) => {
     const userObj = websiteUsers.find((u) => u.user_name === usernameToEdit);
@@ -138,6 +124,8 @@ export const AdminDashboard = () => {
 
   const handleClearSubmit = async (e) => {
     e.preventDefault();
+    setSearchTerm("");
+    retriveAllUsers();
   };
 
   const handleSearchSubmit = async (e) => {
@@ -167,30 +155,21 @@ export const AdminDashboard = () => {
     <div className="admin-dashboard-container">
       <PageHeading heading="Admin Dashboard" />
       <br />
-      <div className="search-container">
-        <label>Search for User:</label>
-        <input
-          type="text"
-          placeholder="Search by username"
-          value={searchTerm}
-          onChange={handleSearchInputChange}
-        />
-        <button type="submit" id="update" onClick={handleSearchSubmit}>
-          Search
-        </button>
-        <button type="submit" id="update" onClick={handleClearSubmit}>
-          Clear
-        </button>
-      </div>
-      {websiteUsers &&
-        websiteUsers.map((websiteUser) => (
-          <UsersListItem
-            username={websiteUser.user_name}
-            displayName={JSON.parse(websiteUser.meta_data).displayName}
-            dp={JSON.parse(websiteUser.meta_data).dp}
-            email={JSON.parse(websiteUser.meta_data).email}
-            userRole={websiteUser.user_role}
-            handleUsersListItemClick={handleUsersListItemClick}
+    <div className="search-container">
+        <label>Search:</label>
+        <input type="text" placeholder="Search by username" value={searchTerm} onChange={handleSearchInputChange} />
+        <button type="submit" id ="update" onClick={handleSearchSubmit}>Search</button>
+        <button type="submit" id ="update" onClick={handleClearSubmit}>Clear</button>
+    </div>
+    <div className = "Users-list">
+      { websiteUsers && websiteUsers.map((websiteUser) => (
+        <UsersListItem 
+          username={websiteUser.user_name}  
+          displayName={JSON.parse(websiteUser.meta_data).displayName}
+          dp={JSON.parse(websiteUser.meta_data).dp}
+          email={JSON.parse(websiteUser.meta_data).email}
+          userRole={websiteUser.user_role}
+          handleUsersListItemClick={handleUsersListItemClick}
           />
         ))}
 
@@ -214,6 +193,7 @@ export const AdminDashboard = () => {
           <p>Sorry, something went wrong. Please try again.</p>
         </div>
       )}
+    </div>
     </div>
   );
 };
