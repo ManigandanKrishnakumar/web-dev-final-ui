@@ -26,13 +26,19 @@ export const SpeedTest = () => {
   const saveResult = async () => {
     try {
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
-      const res = await axiosConfig.post(
-        BACK_END_POINTS.SPEED_TEST.SAVE_RESULT,
-        result
-      );
-      if (!res.data.isSuccess) {
+      const res = await fetch(BACK_END_POINTS.SPEED_TEST.SAVE_RESULT, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(result),
+      });
+      const data = await res.json();
+      if (data.isSuccess) {
         throw new Error(JSON.stringify(res.data));
       }
+      dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     } catch (e) {
       console.log("ERR on Save : ", e);
     }
@@ -69,7 +75,7 @@ export const SpeedTest = () => {
 
   const SoMApiInit = () => {
     const api = window.SomApi;
-    api.account = ""; // YOUR API KEY
+    api.account = "SOM6441515c70a8c"; // YOUR API KEY
     api.domainName = "localhost";
     api.config.sustainTime = 4;
     api.config.testServerEnabled = true;
