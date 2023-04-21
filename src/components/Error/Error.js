@@ -23,7 +23,9 @@ export const Error = ({error}) => {
   dispatch({type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
 }}>Delete</button>)}</div>
       <div>
-      <button type="button" id="retry-btn" onClick={error.callback}>Retry</button>
+      {error.message === "No results found" && (  
+      <button type="button" id="retry-btn" onClick={error.callback}>Retry</button> )}
+
       <button type="button" id="cancel-btn" onClick={onCancel}>Cancel</button>
       </div>
       </div>
