@@ -25,19 +25,6 @@ export const AdminDashboard = () => {
     React.useState("Normal-User");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // if (window.location.pathname === '/admin-dashboard') {
-  //   sessionStorage.setItem('adminDashboardUrl', window.location.href);
-  // }
-
-  // window.onload = function() {
-  //   const adminDashboardUrl = sessionStorage.getItem('adminDashboardUrl');
-  //   console.log(window.location.href);
-  //   console.log(adminDashboardUrl && window.location.href === adminDashboardUrl);
-  //   if (adminDashboardUrl && window.location.href === adminDashboardUrl) {
-  //       navigate(adminDashboardUrl);
-  //   }
-  // };
-
   const handleUsersListItemClick = (usernameToEdit) => {
     const userObj = websiteUsers.find((u) => u.user_name === usernameToEdit);
     setUserToEditObj(userObj);
@@ -137,6 +124,8 @@ export const AdminDashboard = () => {
 
   const handleClearSubmit = async (e) => {
     e.preventDefault();
+    setSearchTerm("");
+    retriveAllUsers();
   };
 
   const handleSearchSubmit = async (e) => {
@@ -204,6 +193,7 @@ export const AdminDashboard = () => {
           <p>Sorry, something went wrong. Please try again.</p>
         </div>
       )}
+    </div>
     </div>
   );
 };
