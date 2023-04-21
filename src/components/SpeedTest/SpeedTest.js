@@ -104,8 +104,7 @@ export const SpeedTest = () => {
 
   const startTest = () => {
     // console.log(data[STATES.CURRENT_USER].apiKey);
-    window.SomApi.account =
-      data[STATES.CURRENT_USER].apiKey || "SOM6441515c70a8c";
+    window.SomApi.account = data[STATES.CURRENT_USER].apiKey;
     setResult(null);
     setError(false);
     setSaveError(false);
