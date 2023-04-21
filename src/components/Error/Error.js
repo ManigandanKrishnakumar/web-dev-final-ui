@@ -15,15 +15,15 @@ export const Error = ({error}) => {
   const showDeleteButton = error.errorMessage === "User does not exist";
 
   return (
-    <div className="loader-container">
-      <div className="loader-content primary">
+    <div className="error-container">
+      <div className="error-content primary">
       <h1>{error.errorMessage}</h1>
       <div>{showDeleteButton && (<button type="button" id="cancel-btn" onClick={() => {
   data[STATES.ASYM_AUTH].deleteUsername(error.username);
   dispatch({type: ACTION_TYPES.SET_ERROR_STATUS, payload: null});
 }}>Delete</button>)}</div>
       <div>
-      {error.message === "No results found" && (  
+      {error.message !== "No results found" && (  
       <button type="button" id="retry-btn" onClick={error.callback}>Retry</button> )}
 
       <button type="button" id="cancel-btn" onClick={onCancel}>Cancel</button>

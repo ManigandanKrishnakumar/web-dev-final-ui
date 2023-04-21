@@ -11,7 +11,6 @@ import { UserEditPopup } from "../../components/UserEditPopup/UserEditPopup";
 import { API_ENDPOINTS } from '../../constants/apiConstants';
 import { SearchUser } from '../../services/SearchUser';
 import { AppError } from "../../models/AppError";
-import { SearchResultItem } from '../../components/SearchResult/SearchResultItem';
 import { useState } from 'react';
 
 export const AdminDashboard = () => {
@@ -172,11 +171,12 @@ export const AdminDashboard = () => {
       <PageHeading heading="Admin Dashboard" />
       <br />
     <div className="search-container">
-        <label>Search for User:</label>
+        <label>Search:</label>
         <input type="text" placeholder="Search by username" value={searchTerm} onChange={handleSearchInputChange} />
         <button type="submit" id ="update" onClick={handleSearchSubmit}>Search</button>
         <button type="submit" id ="update" onClick={handleClearSubmit}>Clear</button>
     </div>
+    <div className = "Users-list">
       { websiteUsers && websiteUsers.map((websiteUser) => (
         <UsersListItem 
           username={websiteUser.user_name}  
@@ -187,7 +187,7 @@ export const AdminDashboard = () => {
           handleUsersListItemClick={handleUsersListItemClick}
           />
       )) }
-
+    </div>
       { showPopup && <UserEditPopup
         username={userToEditObj.user_name}  
         displayName={JSON.parse(userToEditObj.meta_data).displayName}

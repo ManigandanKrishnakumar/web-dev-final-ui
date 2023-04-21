@@ -1,92 +1,18 @@
-// .loader-container {
-//     position: fixed;
-//     background: #000;
-//     opacity: 0.5;
-//     top: 0;
-//     bottom: 0;
-//     left: 0;
-//     right: 0;
-//     z-index: 0;
-
-//     .loader-content {
-//         position: fixed;
-//         z-index: 1;
-//         top: 50%;
-//         left: 50%;
-//         height: 300px;
-//         width: 300px;
-//         border-radius: 20px;
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: center;
-//         align-items: center;
-//     }
-// }
-// .loader-content h1 {
-//     font-size: 2em;
-//     font-weight: bold;
-//     margin-bottom: 1em;
-//     text-align: center;
-//     }
-
-//     #delete-btn {
-//       background-color: #f44336;
-//       color: #fff;
-//       border-radius: 10px;
-//       font-size: 20px;
-//       padding: 10px 20px;
-//       margin-bottom: 1em;
-//   }
-  
-//   #delete-btn:hover {
-//       background-color: #d32f2f;
-//   }
-
-// #retry-btn {
-//   background-color: #fff;
-//   color: #f44336;
-//   border-radius: 10px;
-//   font-size: 20px;
-//   padding: 10px 20px;
-//   position: absolute;
-//   left: 10.00%;
-//   bottom: 20px;
-//   }
-  
-// #retry-btn:hover {
-//     background-color: #d32f2f;
-//   }
-  
-// #cancel-btn {
-//     background-color: #ccc;
-//     color: #000;
-//     border-radius: 10px;
-//     font-size: 20px;
-//     padding: 10px 20px;
-//     position: absolute;
-//     right: 10%;
-//     bottom: 20px;
-//   }
-  
-// #cancel-btn:hover {
-//     background-color: #aaa;
-//   }
-
-  .loader-container {
+.error-container {
     position: fixed;
-    background: #000;
-    opacity: 0.5;
     top: 0;
-    bottom: 0;
     left: 0;
-    right: 0;
-    z-index: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
 
-    .loader-content {
+    .error-content {
         position: fixed;
         z-index: 1;
-        top: 50%;
-        left: 50%;
         height: 300px;
         width: 300px;
         border-radius: 20px;
@@ -94,10 +20,12 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: #eeece8;
+        top: 10%;
     }
 }
 
-.loader-content h1 {
+.error-content h1 {
     font-size: 2em;
     font-weight: bold;
     margin-bottom: 1em;
@@ -141,3 +69,37 @@
 #cancel-btn:hover {
     background-color: #aaa;
 }
+
+@media (max-width: 810px) {
+    .error-container .error-content {
+        height: 200px;
+        width: 200px;
+        border-radius: 10px;
+        top: 10%;
+    }
+
+    .error-content h1 {
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 0.5em;
+        text-align: center;
+    }
+
+    #retry-btn {
+        background-color: #fff;
+        color: #f44336;
+        border-radius: 10px;
+        font-size: 12px;
+        padding: 10px 20px 10px;
+        margin-right: 5px;
+    }
+
+    #cancel-btn {
+        background-color: #ccc;
+        color: #000;
+        border-radius: 10px;
+        font-size: 12px;
+        padding: 10px 20px;
+    }
+    
+  }

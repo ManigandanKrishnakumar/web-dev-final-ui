@@ -22,4 +22,5 @@ export const ACTION_TYPES = {
   SET_CURRENT_USER: "setCurrentUser",
   SET_LOADING_STATUS: "setLoadingStatus",
   SET_ERROR_STATUS: "setErrorStatus",
+  
 };
