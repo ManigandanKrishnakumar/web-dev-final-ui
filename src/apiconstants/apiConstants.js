@@ -1,6 +1,6 @@
 const BackEndServer_PORT = 5000;
 const BackEndServer_HOST = "http://localhost";
-const BackEndServer_BASE_URL = `${BackEndServer_HOST}:${BackEndServer_PORT}`;
+export const BackEndServer_BASE_URL = `${BackEndServer_HOST}:${BackEndServer_PORT}`;
 
 export const BACK_END_POINTS = {
   SIGN_IN: {
@@ -16,5 +16,8 @@ export const BACK_END_POINTS = {
   SPEED_TEST: {
     SAVE_RESULT: `${BackEndServer_BASE_URL}/api/speed-test/save`,
     FETCH_RESULT: `${BackEndServer_BASE_URL}/api/speed-test/fetch`,
+  },
+  REQUESTS: {
+    FETCH_ALL: `${BackEndServer_BASE_URL}/api/access-requests/fetch-all`,
   },
 };

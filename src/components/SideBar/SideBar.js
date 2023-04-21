@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { USER_ROLES } from "../../constants/appConstants";
 import { PAGES, URLS } from "../../constants/navConstants";
 import { AppContext } from "../../state-management/app-context";
-import {STATES } from "../../state-management/constants";
+import { STATES } from "../../state-management/constants";
 import { AppLogo } from "../AppLogo/AppLogo";
 import { NavItem } from "../NavItem/NavItem";
 import { UserPreview } from "../UserPreview/UserPreview";
@@ -25,9 +25,16 @@ export const SideBar = () => {
 
       [URLS.adminDashboard]: () => {
         const user = data[STATES.CURRENT_USER];
-        return !((user.userRole === USER_ROLES.ADMIN) && data[STATES.IS_LOGGED_IN]);
+        return !(
+          user.userRole === USER_ROLES.ADMIN && data[STATES.IS_LOGGED_IN]
+        );
       },
-    
+      [URLS.requests]: () => {
+        const user = data[STATES.CURRENT_USER];
+        return !(
+          user.userRole === USER_ROLES.ADMIN && data[STATES.IS_LOGGED_IN]
+        );
+      },
       default: false,
     };
     if (hideMap[url]) {

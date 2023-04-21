@@ -4,6 +4,7 @@ export const URLS = {
   adminDashboard: "/admin-dashboard",
   signIn: "/signin",
   signUp: "/signup",
+  requests: "/requests",
   default: "/",
 };
 
@@ -27,5 +28,10 @@ export const PAGES = [
     id: "3",
     url: URLS.adminDashboard,
     name: "Admin Dashboard",
+  },
+  {
+    id: "4",
+    url: URLS.requests,
+    name: "Requests",
   },
 ];

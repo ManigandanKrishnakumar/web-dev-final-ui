@@ -1,4 +1,9 @@
 .content-provider-container {
     flex: 1;
     padding: 10px 20px;
+    overflow: auto;
+
+    @media screen and (width <= 430px) {
+        padding: 5px 5px;
+    }
 }

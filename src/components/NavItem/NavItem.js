@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import { NavIcons } from "../NavIcons/NavIcons";
 
 import "./NavItem.scss";
+import { URLS } from "../../constants/navConstants";
+import { RequestsBadge } from "../RequestsBadge/RequestsBadge";
 
 export const NavItem = ({ pageUrl, label, hide }) => {
   const location = useLocation();
@@ -28,6 +30,7 @@ export const NavItem = ({ pageUrl, label, hide }) => {
       <Link to={pageUrl} className="nav-link">
         {label}
       </Link>
+      {pageUrl === URLS.requests && <RequestsBadge />}
     </div>
   );
 };
