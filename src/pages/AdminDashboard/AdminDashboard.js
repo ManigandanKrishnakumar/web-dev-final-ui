@@ -205,6 +205,7 @@ export const AdminDashboard = () => {
           handleUserRoleChange={handleUserRoleChange}
           userRoleState={userRoleOfSpecificUser}
           setUserRoleState={setUserRoleOfSpecificUser}
+          metadata={userToEditObj.meta_data}
         />
       )}
       {errStatus && (

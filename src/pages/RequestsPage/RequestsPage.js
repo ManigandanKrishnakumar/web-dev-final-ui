@@ -99,6 +99,7 @@ export const RequestsPage = () => {
   };
 
   const approveRequest = async (username, meta_data, id) => {
+    console.log(meta_data);
     // console.log(id);
     try {
       dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null });
@@ -112,7 +113,7 @@ export const RequestsPage = () => {
         body: JSON.stringify({
           id: id,
           username: username,
-          meta_data: meta_data,
+          meta_data: JSON.parse(meta_data),
         }),
       });
       await res.json();
