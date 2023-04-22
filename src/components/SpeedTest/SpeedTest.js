@@ -30,9 +30,6 @@ export const SpeedTest = () => {
     setUploadSpeed("N/A");
     SoMApiInit();
     testHistory();
-    if (!data[STATES.IS_LOGGED_IN]) {
-      setPastTests([]);
-    }
   }, [data[STATES.CURRENT_USER]]);
 
   const deleteHistory = async () => {
