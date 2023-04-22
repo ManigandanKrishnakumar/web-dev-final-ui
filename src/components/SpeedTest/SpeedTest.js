@@ -206,7 +206,7 @@ export const SpeedTest = () => {
           Save Result
         </button>
       </div>
-      {pastTests.length != 0 && (
+      {data[STATES.IS_LOGGED_IN] && pastTests.length != 0 && (
         <div className="history-title">
           <h2 className="past-test-heading">History of Speed Tests</h2>
           <button className="clear-button" onClick={deleteHistory}>
@@ -214,7 +214,8 @@ export const SpeedTest = () => {
           </button>
         </div>
       )}
-      {pastTests.length != 0 &&
+      {data[STATES.IS_LOGGED_IN] &&
+        pastTests.length != 0 &&
         pastTests.map((pastTest) => {
           return (
             <div id="speed-history-container">
