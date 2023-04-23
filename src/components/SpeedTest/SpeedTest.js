@@ -74,6 +74,7 @@ export const SpeedTest = () => {
       if (!data.isSuccess) {
         throw new Error(JSON.stringify(res.data));
       }
+      testHistory();
     } catch (e) {
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       setSaveError(true);
