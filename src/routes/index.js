@@ -7,9 +7,10 @@ import {
   RequestsPage,
   SignIn,
   TestFunctionality,
-  UserProfile
+  UserProfile,
 } from "../pages";
 import { SignUp } from "../pages/SignUp/SignUp";
+import { PublicUserInfo } from "../pages/PublicUserInfo/PublicUserInfo";
 
 export const RouterOutlet = () => {
   return (
@@ -22,7 +23,8 @@ export const RouterOutlet = () => {
       <Route path={URLS.userInfo} element={<ProtectedPage />} />
       <Route path={URLS.requests} element={<RequestsPage />}></Route>
       <Route path="/test-functionality" element={<TestFunctionality />} />
-      <Route path={URLS.Userdetails} element = {<UserProfile />} />
+      <Route path={URLS.Userdetails} element={<UserProfile />} />
+      <Route path="/:username" element={<PublicUserInfo />} />
     </Routes>
   );
 };

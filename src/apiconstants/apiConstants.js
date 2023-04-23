@@ -13,6 +13,7 @@ export const BACK_END_POINTS = {
     DELETE: `${BackEndServer_BASE_URL}/api/user/delete-user`,
     SEARCH: `${BackEndServer_BASE_URL}/api/user/search-user`,
     LISTUSERS: `${BackEndServer_BASE_URL}/api/user/list-users`,
+    PUBLICINFO: `${BackEndServer_BASE_URL}/api/user/public-info`,
   },
   SPEED_TEST: {
     SAVE_RESULT: `${BackEndServer_BASE_URL}/api/speed-test/save`,
