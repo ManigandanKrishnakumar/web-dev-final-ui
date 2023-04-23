@@ -109,7 +109,8 @@
     }
   }
   .past-test-heading {
-    margin-top: 20px;
+    padding-right: 10px;
+    margin-bottom: 0px;
     @media screen and (width < 960px) {
       font-size: 1.5rem;
     }
@@ -117,6 +118,18 @@
       font-size: 1rem;
       width: 200px;
     }
+  }
+  .history-title {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .clear-button {
+    height: fit-content;
+    background-color: red;
+    color: white;
+    padding: 5px;
   }
 }
 
@@ -130,6 +143,8 @@
 }
 
 #speed-history-container {
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
   .speed-test-info {
     display: flex;
     justify-content: space-between;
@@ -161,6 +176,12 @@
 
     .metric {
       font-size: 1.5rem;
+      @media screen and (width < 960px) {
+        font-size: 1rem;
+      }
+      @media screen and (width < 600px) {
+        font-size: 0.75rem;
+      }
     }
 
     .unit {
