@@ -41,8 +41,8 @@ export const SpeedTest = () => {
       credentials: "include",
     });
     const data = await res.json();
-    console.log("Fetching Speed History Data!");
-    console.log(data.payload);
+    // console.log("Fetching Speed History Data!");
+    // console.log(data.payload);
     setPastTests(data.payload);
   };
 

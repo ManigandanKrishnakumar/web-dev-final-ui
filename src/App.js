@@ -17,7 +17,7 @@ function App() {
 
   const fetchAllRequests = async () => {
     try {
-      console.log("App.js fetch requests");
+      //console.log("App.js fetch requests");
       dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null });
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
       const res = await fetch(BACK_END_POINTS.REQUESTS.FETCH_ALL, {
@@ -28,7 +28,7 @@ function App() {
         },
       });
       const dataR = await res.json();
-      console.log(data.payload);
+      //console.log(data.payload);
       data[STATES.REQUESTS] = dataR.payload;
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       dispatch({
@@ -36,7 +36,7 @@ function App() {
         payload: [...dataR.payload],
       });
 
-      console.log(data[STATES.REQUESTS]);
+      //console.log(data[STATES.REQUESTS]);
     } catch (error) {
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       dispatch({
@@ -71,7 +71,7 @@ function App() {
         const userInfo = await result.json();
         data[STATES.IS_LOGGED_IN] = true;
         data[STATES.CURRENT_USER] = userInfo;
-        console.log(">>>", userInfo);
+        //console.log(">>>", userInfo);
         setUser(userInfo);
         await fetchAllRequests();
 

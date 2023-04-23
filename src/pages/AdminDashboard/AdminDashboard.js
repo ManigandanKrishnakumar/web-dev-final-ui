@@ -21,8 +21,7 @@ export const AdminDashboard = () => {
   const [userToEditObj, setUserToEditObj] = React.useState(null);
   const [websiteUsers, setWebsiteUsers] = React.useState(null);
   const [errStatus, setErrStatus] = React.useState(false);
-  const [userRoleOfSpecificUser, setUserRoleOfSpecificUser] =
-    React.useState("Normal-User");
+  const [userRoleOfSpecificUser, setUserRoleOfSpecificUser] = React.useState("Normal-User");
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleUsersListItemClick = (usernameToEdit) => {
@@ -47,7 +46,6 @@ export const AdminDashboard = () => {
         throw resJson;
       }
     } catch (err) {
-      //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     }
@@ -72,7 +70,6 @@ export const AdminDashboard = () => {
         throw resJson;
       }
     } catch (err) {
-      //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     }
@@ -102,7 +99,6 @@ export const AdminDashboard = () => {
         throw resJson;
       }
     } catch (err) {
-      //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     }
@@ -158,8 +154,8 @@ export const AdminDashboard = () => {
     <div className="search-container">
         <label>Search:</label>
         <input type="text" placeholder="Search by username" value={searchTerm} onChange={handleSearchInputChange} />
-        <button type="submit" id ="update" onClick={handleSearchSubmit}>Search</button>
-        <button type="submit" id ="update" onClick={handleClearSubmit}>Clear</button>
+        <button type="submit" id ="search" onClick={handleSearchSubmit}>Search</button>
+        <button type="submit" id ="search" onClick={handleClearSubmit}>Clear</button>
     </div>
     <div className = "Users-list">
       { websiteUsers && websiteUsers.map((websiteUser) => (

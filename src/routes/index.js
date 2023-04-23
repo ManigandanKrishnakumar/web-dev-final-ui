@@ -7,6 +7,7 @@ import {
   RequestsPage,
   SignIn,
   TestFunctionality,
+  UserProfile
 } from "../pages";
 import { SignUp } from "../pages/SignUp/SignUp";
 
@@ -21,6 +22,7 @@ export const RouterOutlet = () => {
       <Route path={URLS.userInfo} element={<ProtectedPage />} />
       <Route path={URLS.requests} element={<RequestsPage />}></Route>
       <Route path="/test-functionality" element={<TestFunctionality />} />
+      <Route path={URLS.Userdetails} element = {<UserProfile />} />
     </Routes>
   );
 };
