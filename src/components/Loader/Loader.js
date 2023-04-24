@@ -1,6 +1,6 @@
 import React from "react";
 
-import { GiHouseKeys } from "react-icons/gi";
+import { BsSpeedometer2 } from "react-icons/bs";
 
 import "./Loader.scss";
 
@@ -8,7 +8,7 @@ export const Loader = () => {
   return (
     <div className="loader-container">
       <div className="loader-content primary">
-      <GiHouseKeys id="app-icon" />
+        <BsSpeedometer2 id="app-icon" />
       </div>
     </div>
   );

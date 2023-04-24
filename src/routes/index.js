@@ -24,7 +24,7 @@ export const RouterOutlet = () => {
       <Route path={URLS.requests} element={<RequestsPage />}></Route>
       <Route path="/test-functionality" element={<TestFunctionality />} />
       <Route path={URLS.Userdetails} element={<UserProfile />} />
-      <Route path="/:username" element={<PublicUserInfo />} />
+      <Route path="/user/:username" element={<PublicUserInfo />} />
     </Routes>
   );
 };

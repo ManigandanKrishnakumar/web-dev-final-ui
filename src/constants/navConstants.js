@@ -6,7 +6,7 @@ export const URLS = {
   signUp: "/signup",
   requests: "/requests",
   default: "/",
-  Userdetails: "/Users"
+  Userdetails: "/users",
 };
 
 export const PAGES = [

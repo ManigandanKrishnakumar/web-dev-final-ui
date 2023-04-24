@@ -5,6 +5,8 @@ import { ACTION_TYPES, STATES } from "../../state-management/constants";
 import { AppContext } from "../../state-management/app-context";
 import { BACK_END_POINTS } from "../../apiconstants/apiConstants";
 import { UserPopup } from "../../components/UsersList/Userpopup";
+import { URLS } from "../../constants/navConstants";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const PublicUserInfo = () => {
   const { pathname } = useLocation();
@@ -12,11 +14,11 @@ export const PublicUserInfo = () => {
   const [errStatus, setErrStatus] = React.useState(false);
   const [publicInfo, setPublicInfo] = useState();
   const [showPopup, setShowPopup] = React.useState(false);
+  const { username } = useParams();
   console.log("Inside Public User Info");
 
   const getPublicInfo = async () => {
-    const paths = pathname.split("/");
-    var username = paths[1];
+    // var username = username;
     setErrStatus(false);
     dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
     try {
@@ -50,7 +52,7 @@ export const PublicUserInfo = () => {
   useEffect(() => {
     getPublicInfo();
   }, []);
-
+  const navigate = useNavigate();
   return (
     <div>
       {publicInfo && showPopup && (
@@ -58,7 +60,11 @@ export const PublicUserInfo = () => {
           displayName={JSON.parse(publicInfo.meta_data).displayName}
           dp={JSON.parse(publicInfo.meta_data).dp}
           email={JSON.parse(publicInfo.meta_data).email}
-          setShowPopup={setShowPopup}
+          onClose={() => {
+            setShowPopup(false);
+            navigate(URLS.Userdetails);
+            console.log(">>>");
+          }}
         />
       )}
       {errStatus && (
