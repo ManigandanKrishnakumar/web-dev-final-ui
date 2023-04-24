@@ -99,7 +99,6 @@ export const RequestsPage = () => {
   };
 
   const approveRequest = async (username, meta_data, id) => {
-    console.log(meta_data);
     // console.log(id);
     try {
       dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null });
@@ -140,6 +139,9 @@ export const RequestsPage = () => {
     <div id="requests-page-container">
       <h1> Requests Page</h1>
       <div className="requests-container">
+        {data[STATES.REQUESTS].length === 0 && (
+          <p className="no-req"> No requests at the moment !</p>
+        )}
         {data[STATES.REQUESTS].map((request, index) => {
           return (
             <RequestItem

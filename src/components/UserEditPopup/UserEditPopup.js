@@ -22,30 +22,16 @@ export const UserEditPopup = ({
         />
         <div className="profile">
           <div className="dp-container">
-            <div className="dp-border">
-              <img src={dp} alt="DP of the user" className="profile-picture" />
-            </div>
+            <img src={dp} className="profile-picture" />
           </div>
-          <div className="user-display-name">
-            <h2 className="column-item-left">Display Name</h2>
-            <h2 className="column-item-colon">:</h2>
-            <h2 className="column-item-right">{displayName}</h2>
+          <div className="user-details">Username: {username}</div>
+          <div className="user-details">Display Name: @{displayName}</div>
+
+          <div className="user-details">
+            Email ID: <i>{email}</i>
           </div>
-          <div className="user-username">
-            <p className="column-item-left">Username</p>
-            <p className="column-item-colon">:</p>
-            <p className="column-item-right">@{username}</p>
-          </div>
-          <div className="user-email-id">
-            <p className="column-item-left">Email ID</p>
-            <p className="column-item-colon">:</p>
-            <p className="column-item-right">
-              <i>{email}</i>
-            </p>
-          </div>
-          <div className="user-userrole">
-            <p className="column-item-left">User's Role</p>
-            <p className="column-item-colon">:</p>
+          <div className="user-details">
+            User's Role:
             <div className="column-item-right-drop-down">
               <select
                 value={userRoleState}
@@ -58,25 +44,20 @@ export const UserEditPopup = ({
             </div>
           </div>
           <div className="profile-footer-buttons">
-            <div className="column-item-left">
-              <button
-                className="button-delete-user"
-                onClick={() => handleDeleteUser(username)}
-              >
-                Delete User
-              </button>
-            </div>
-            <p className="column-item-colon"> </p>
-            <div className="column-item-right">
-              <button
-                className="button-save-changes"
-                onClick={() =>
-                  handleUserRoleChange(username, userRoleState, metadata)
-                }
-              >
-                Save Changes
-              </button>
-            </div>
+            <button
+              className="button-delete-user"
+              onClick={() => handleDeleteUser(username)}
+            >
+              Delete User
+            </button>
+            <button
+              className="button-save-changes"
+              onClick={() =>
+                handleUserRoleChange(username, userRoleState, metadata)
+              }
+            >
+              Save Changes
+            </button>
           </div>
         </div>
       </div>

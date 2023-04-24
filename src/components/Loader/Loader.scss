@@ -1,28 +1,28 @@
 .loader-container {
     position: fixed;
-    background: #000;
-    opacity: 0.5;
+    background-color: rgba(0, 0, 0, 0.5);
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 0;
+    z-index: 1;
 
     .loader-content {
         position: fixed;
         z-index: 1;
         top: 50%;
         left: 50%;
-        height: 100px;
-        width: 100px;
+        height: 70px;
+        width: 70px;
         transform: translateY(-50%);
         display: flex;
         justify-content: center;
         align-items: center;
         border-radius: 20px;
+        background-color: #eeece8;
         #app-icon {
             color: var(--action);
-            font-size: 3rem;
+            font-size: 2rem;
             opacity: 1;
             animation: loading 0.5s;
             animation-iteration-count: infinite;
@@ -38,3 +38,5 @@
         }
     }
 }
+
+

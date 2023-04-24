@@ -5,7 +5,7 @@ import { AppContextProvider } from "./state-management/app-context";
 import { ACTION_TYPES, STATES } from "./state-management/constants";
 import { appReducer } from "./state-management/app-reducer";
 import { INITIAL_STATE } from "./state-management/constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { BACK_END_POINTS } from "./apiconstants/apiConstants";
 import { AppError } from "./models/AppError";
 import { socket } from "./sockets/socket";
@@ -14,6 +14,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [data, dispatch] = useReducer(appReducer, INITIAL_STATE);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const fetchAllRequests = async () => {
     try {
@@ -27,7 +28,7 @@ function App() {
         },
       });
       const dataR = await res.json();
-      console.log(data.payload);
+      //console.log(data.payload);
       data[STATES.REQUESTS] = dataR.payload;
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       dispatch({
@@ -35,7 +36,7 @@ function App() {
         payload: [...dataR.payload],
       });
 
-      console.log(data[STATES.REQUESTS]);
+      //console.log(data[STATES.REQUESTS]);
     } catch (error) {
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       dispatch({
@@ -60,6 +61,8 @@ function App() {
   useEffect(() => {
     async function Checklogin() {
       try {
+        data[STATES.IS_LOADING] = true;
+
         const result = await fetch("http://localhost:5000/api/user/logged-in", {
           method: "GET",
           credentials: "include",
@@ -68,16 +71,23 @@ function App() {
           throw new Error("not logged In");
         }
         const userInfo = await result.json();
+        data[STATES.IS_LOADING] = false;
+
         data[STATES.IS_LOGGED_IN] = true;
         data[STATES.CURRENT_USER] = userInfo;
-        console.log(">>>", userInfo);
+        dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: true });
+        dispatch({ type: ACTION_TYPES.SET_CURRENT_USER, payload: userInfo });
+        //console.log(">>>", userInfo);
         setUser(userInfo);
         await fetchAllRequests();
 
         listenforNewRequest();
       } catch (error) {
         data[STATES.IS_LOGGED_IN] = false;
-        navigate("/");
+        dispatch({ type: ACTION_TYPES.SET_LOGIN_STATUS, payload: false });
+        data[STATES.IS_LOADING] = false;
+
+        // navigate("/");
         //console.error(error);
       }
     }
@@ -90,12 +100,6 @@ function App() {
       // socket.disconnect();
     };
   }, [user]);
-
-  // useEffect(() => {
-  //   localStorage.setItem('path', window.location.pathname);
-  // }, []);
-  // const storedPath = localStorage.getItem('path');
-  // console.log(storedPath);
 
   return (
     <AppContextProvider value={{ data, dispatch }}>
