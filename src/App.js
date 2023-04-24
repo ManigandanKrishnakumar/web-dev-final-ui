@@ -18,7 +18,6 @@ function App() {
 
   const fetchAllRequests = async () => {
     try {
-      //console.log("App.js fetch requests");
       dispatch({ type: ACTION_TYPES.SET_ERROR_STATUS, payload: null });
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: true });
       const res = await fetch(BACK_END_POINTS.REQUESTS.FETCH_ALL, {

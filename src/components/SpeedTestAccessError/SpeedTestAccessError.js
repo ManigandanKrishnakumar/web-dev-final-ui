@@ -16,7 +16,7 @@ export const SpeedTestAccessError = () => {
         timestamp: new Date().toISOString(),
         user: data[STATES.CURRENT_USER].username,
       });
-      socket.disconnect();
+      // socket.disconnect();
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
       setRequested(true);
     } catch (e) {
