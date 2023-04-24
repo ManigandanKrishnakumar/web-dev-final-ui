@@ -1,0 +1,54 @@
+.user-view-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .user-view-popup-interior {
+    background-color: #eeece8;
+    width: 300px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+  }
+  
+  .user-view-close-button {
+    position: relative;
+    right: 120px;
+    cursor: pointer;
+  }
+  
+  .dp-container-view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture-view {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .user-details-view {
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+
+  @media (max-width: 811px) {
+    .user-view-popup {
+      top: -20%;
+    }
+  }

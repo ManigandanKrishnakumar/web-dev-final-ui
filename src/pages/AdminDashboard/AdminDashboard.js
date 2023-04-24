@@ -11,7 +11,7 @@ import { UserEditPopup } from "../../components/UserEditPopup/UserEditPopup";
 import { API_ENDPOINTS } from "../../constants/apiConstants";
 import { SearchUser } from "../../services/SearchUser";
 import { AppError } from "../../models/AppError";
-import { useState } from 'react';
+import { useState } from "react";
 
 export const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ export const AdminDashboard = () => {
         throw resJson;
       }
     } catch (err) {
-      //console.log(err);
+      console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     }
@@ -72,7 +72,6 @@ export const AdminDashboard = () => {
         throw resJson;
       }
     } catch (err) {
-      //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     }
@@ -102,7 +101,6 @@ export const AdminDashboard = () => {
         throw resJson;
       }
     } catch (err) {
-      //console.log(err);
       setErrStatus(true);
       dispatch({ type: ACTION_TYPES.SET_LOADING_STATUS, payload: false });
     }
@@ -155,45 +153,57 @@ export const AdminDashboard = () => {
     <div className="admin-dashboard-container">
       <PageHeading heading="Admin Dashboard" />
       <br />
-    <div className="search-container">
+      <div className="search-container">
         <label>Search:</label>
-        <input type="text" placeholder="Search by username" value={searchTerm} onChange={handleSearchInputChange} />
-        <button type="submit" id ="update" onClick={handleSearchSubmit}>Search</button>
-        <button type="submit" id ="update" onClick={handleClearSubmit}>Clear</button>
-    </div>
-    <div className = "Users-list">
-      { websiteUsers && websiteUsers.map((websiteUser) => (
-        <UsersListItem 
-          username={websiteUser.user_name}  
-          displayName={JSON.parse(websiteUser.meta_data).displayName}
-          dp={JSON.parse(websiteUser.meta_data).dp}
-          email={JSON.parse(websiteUser.meta_data).email}
-          userRole={websiteUser.user_role}
-          handleUsersListItemClick={handleUsersListItemClick}
-          />
-        ))}
-
-      {showPopup && (
-        <UserEditPopup
-          username={userToEditObj.user_name}
-          displayName={JSON.parse(userToEditObj.meta_data).displayName}
-          dp={JSON.parse(userToEditObj.meta_data).dp}
-          email={JSON.parse(userToEditObj.meta_data).email}
-          setShowPopup={setShowPopup}
-          handleDeleteUser={handleDeleteUser}
-          handleUserRoleChange={handleUserRoleChange}
-          userRoleState={userRoleOfSpecificUser}
-          setUserRoleState={setUserRoleOfSpecificUser}
-          metadata={userToEditObj.meta_data}
+        <input
+          type="text"
+          placeholder="Search by username"
+          value={searchTerm}
+          onChange={handleSearchInputChange}
         />
-      )}
-      {errStatus && (
-        <div>
-          <br />
-          <p>Sorry, something went wrong. Please try again.</p>
-        </div>
-      )}
-    </div>
+        <button type="submit" id="search" onClick={handleSearchSubmit}>
+          Search
+        </button>
+        <button type="submit" id="search" onClick={handleClearSubmit}>
+          Clear
+        </button>
+      </div>
+
+      <div className="Users-list">
+        {websiteUsers &&
+          websiteUsers.map((websiteUser, index) => (
+            <UsersListItem
+              key={index}
+              username={websiteUser.user_name}
+              displayName={JSON.parse(websiteUser.meta_data).displayName}
+              dp={JSON.parse(websiteUser.meta_data).dp}
+              email={JSON.parse(websiteUser.meta_data).email}
+              userRole={websiteUser.user_role}
+              handleUsersListItemClick={handleUsersListItemClick}
+            />
+          ))}
+
+        {showPopup && (
+          <UserEditPopup
+            username={userToEditObj.user_name}
+            displayName={JSON.parse(userToEditObj.meta_data).displayName}
+            dp={JSON.parse(userToEditObj.meta_data).dp}
+            email={JSON.parse(userToEditObj.meta_data).email}
+            setShowPopup={setShowPopup}
+            handleDeleteUser={handleDeleteUser}
+            handleUserRoleChange={handleUserRoleChange}
+            userRoleState={userRoleOfSpecificUser}
+            setUserRoleState={setUserRoleOfSpecificUser}
+            metadata={userToEditObj.meta_data}
+          />
+        )}
+        {errStatus && (
+          <div>
+            <br />
+            <p>Sorry, something went wrong. Please try again.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
