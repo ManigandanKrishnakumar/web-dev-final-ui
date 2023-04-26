@@ -7,6 +7,7 @@ export const URLS = {
   requests: "/requests",
   default: "/",
   Userdetails: "/users",
+  test: "/test-functionality",
 };
 
 export const PAGES = [

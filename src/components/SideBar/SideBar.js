@@ -7,12 +7,11 @@ import { AppLogo } from "../AppLogo/AppLogo";
 import { NavItem } from "../NavItem/NavItem";
 import { UserPreview } from "../UserPreview/UserPreview";
 import { useState } from "react";
-import Hamburger from 'hamburger-react';
+import Hamburger from "hamburger-react";
 
 import "./SideBar.scss";
 
 export const SideBar = () => {
-
   const [showSidebar, setShowSidebar] = useState(false);
 
   const { data } = useContext(AppContext);
@@ -35,6 +34,7 @@ export const SideBar = () => {
           user.userRole === USER_ROLES.ADMIN && data[STATES.IS_LOGGED_IN]
         );
       },
+      [URLS.test]: () => true,
       default: false,
     };
     if (hideMap[url]) {
@@ -46,26 +46,31 @@ export const SideBar = () => {
 
   return (
     <>
-    <button className={`sidebar-toggle ${showSidebar ? 'show' : ''}`}>
-        <Hamburger toggled={showSidebar} toggle={setShowSidebar} />    
-    </button>
+      <button className={`sidebar-toggle ${showSidebar ? "show" : ""}`}>
+        <Hamburger toggled={showSidebar} toggle={setShowSidebar} />
+      </button>
 
-    <div id="side-bar-container" className={`${showSidebar ? "show" : ""} ${showSidebar ? "overlay" : ""}`}>
-      <div>
-        <AppLogo />
-        {PAGES.map((page) => {
-          return (
-            <NavItem
-              pageUrl={page.url}
-              label={page.name}
-              key={page.id}
-              hide={shouldHide(page.url)}
-            />
-          );
-        })}
+      <div
+        id="side-bar-container"
+        className={`${showSidebar ? "show" : ""} ${
+          showSidebar ? "overlay" : ""
+        }`}
+      >
+        <div>
+          <AppLogo />
+          {PAGES.map((page) => {
+            return (
+              <NavItem
+                pageUrl={page.url}
+                label={page.name}
+                key={page.id}
+                hide={shouldHide(page.url)}
+              />
+            );
+          })}
+        </div>
+        <UserPreview />
       </div>
-      <UserPreview />
-    </div>
     </>
   );
 };
